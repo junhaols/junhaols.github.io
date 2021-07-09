@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-07-09T08:06:33.028Z</updated>
+  <updated>2021-07-09T08:49:11.573Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,41 +15,6 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>test first blog</title>
-    <link href="http://example.com/2021/07/09/test-first-blog/"/>
-    <id>http://example.com/2021/07/09/test-first-blog/</id>
-    <published>2021-07-09T08:06:33.000Z</published>
-    <updated>2021-07-09T08:06:33.028Z</updated>
-    
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>三种参数估计的方法</title>
-    <link href="http://example.com/2021/07/09/ljh-test-site/"/>
-    <id>http://example.com/2021/07/09/ljh-test-site/</id>
-    <published>2021-07-09T07:03:46.000Z</published>
-    <updated>2021-07-09T08:53:40.659Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><strong>极大似然估计（Maximum Likelihood Estimation，MLE）和贝叶斯估计（Bayesian Estimation）是统计推断中两种最常用的参数估计方法，二者在机器学习中的应用也十分广泛</strong>。两种方法的本质都是参数估计，即假设抽取到的每一个样本均来自于同一个总体，也就是说，抽样得到的样本$\begin{equation}X_{i}\in f(\theta )\end{equation}$，其中$f(\theta)$为某一分布。极大似然估计和贝叶斯估计的思想都是利用现有的观测数据$X_{i}$去估计该分布的参数$\theta$。</p><h2 id="极大似然估计"><a href="#极大似然估计" class="headerlink" title="极大似然估计"></a>极大似然估计</h2><p>极大似然估计的思想是，假设$\theta$为已知$\theta_{0}$，则对于样本$X_{i}$出现的概率为$f(X_{i}|\theta_{0})$，则对于某样本集${X_{1},X_{2},…,X_{n}}$可以描述为以下事件：$X=X_{1},X=X_{2},…,X=X_{n}$同时出现，又由于这些样本是独立同分布的，由概率的乘法原则，它们同时出现的概率为它们各自出现的概率值相乘，这个也是似然函数定义的由来。于是，似然函数可以定义为：<br>$$L(\theta|x)=f(x|\theta)=f(x=X_{1}|\theta)<em>f(x=X_{2}|\theta)</em>,…,*f(x=X_{n}|\theta)$$<br>简写为：<br>$$L(\theta|x)=\prod_{i=1}^{n}f(x_{i}|\theta)$$<br>这个函数的变量只有$\theta$，$x_{i}$是已知的观测样本。当似然函数最大的时，则认为最有可能出现这样的一组观测值。此时对应的$\theta$即为最有可能的样本服从的原始分布$f(\theta)$的参数值。因此，参数$\theta$的估计一般通过最大化似然函数求对应的自变量$\theta$，故又称<strong>极大似然法</strong>。为了求导等计算的方便，一般会将似然函数先左右同时取对数再计算。</p><h2 id="最大后验概率估计"><a href="#最大后验概率估计" class="headerlink" title="最大后验概率估计"></a>最大后验概率估计</h2><p>最大后验概率估计，英文为Maximum A Posterior Estimation，简写为MAP。与MLE不同的是，MAP是从观测数据出发，认为使得$P(\theta|x)$最大的参数$\theta$为最优的$\theta$。MLE认为$\theta$是固定的值，MAP认为$\theta$服从一个分布，最优的$\theta$即为$\theta$的分布的期望值。因此，MAP的目的就是通观测样本$X$去估计$\theta$的分布。由贝叶斯公式可得：<br>$$P(\theta|X)=\frac{P(X|\theta)P(\theta)}{P(X)}$$<br>对于极大似然估计，认为$\theta$为固定值，此时$P(\theta)=1$，而对于最大后演概率估计，$P(\theta)$的取值有由$\theta$的概率分布得到。由于$X$的先验分布是已知的，因此$P(X)$是已知的。并且$P(X)$与$\theta$无关，因此最大后验概率估计的的优化公式可以转换为：<br>$$\underset{\theta}{argmax}P(\theta|X)=\underset{\theta}{argmax}\frac{P(X|\theta)P(\theta)}{P(X)}$$</p><h2 id="贝叶斯估计"><a href="#贝叶斯估计" class="headerlink" title="贝叶斯估计"></a>贝叶斯估计</h2><h1 id="参考材料"><a href="#参考材料" class="headerlink" title="参考材料"></a>参考材料</h1><p><a href="https://zhuanlan.zhihu.com/p/61593112">https://zhuanlan.zhihu.com/p/61593112</a><br><a href="https://www.jiqizhixin.com/articles/2019-01-18-12">https://www.jiqizhixin.com/articles/2019-01-18-12</a><br><a href="http://noahsnail.com/2018/05/17/2018-05-17-%E8%B4%9D%E5%8F%B6%E6%96%AF%E4%BC%B0%E8%AE%A1%E3%80%81%E6%9C%80%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1%E3%80%81%E6%9C%80%E5%A4%A7%E5%90%8E%E9%AA%8C%E6%A6%82%E7%8E%87%E4%BC%B0%E8%AE%A1/">http://noahsnail.com/2018/05/17/2018-05-17-%E8%B4%9D%E5%8F%B6%E6%96%AF%E4%BC%B0%E8%AE%A1%E3%80%81%E6%9C%80%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1%E3%80%81%E6%9C%80%E5%A4%A7%E5%90%8E%E9%AA%8C%E6%A6%82%E7%8E%87%E4%BC%B0%E8%AE%A1/</a></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;极大似然估计（Maximum Likelihood Estimation，MLE）和贝叶斯估计（Bayesian Estim</summary>
-      
-    
-    
-    
-    
-    <category term="机器学习，极大似然估计，贝叶斯" scheme="http://example.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%8C%E6%9E%81%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1%EF%BC%8C%E8%B4%9D%E5%8F%B6%E6%96%AF/"/>
-    
-  </entry>
   
   <entry>
     <title>三种参数估计方法</title>
@@ -74,18 +39,18 @@
   </entry>
   
   <entry>
-    <title>Hello World</title>
-    <link href="http://example.com/2021/07/09/hello-world/"/>
-    <id>http://example.com/2021/07/09/hello-world/</id>
-    <published>2021-07-09T07:02:34.962Z</published>
-    <updated>2021-07-09T07:02:34.962Z</updated>
+    <title></title>
+    <link href="http://example.com/2021/07/09/Hexo+Github%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/"/>
+    <id>http://example.com/2021/07/09/Hexo+Github%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</id>
+    <published>2021-07-09T04:13:00.000Z</published>
+    <updated>2021-07-09T15:23:30.351Z</updated>
     
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+    <content type="html"><![CDATA[<h1 id="工具选择"><a href="#工具选择" class="headerlink" title="工具选择"></a>工具选择</h1><p><strong>Hexo+Github</strong>，搭建步骤请参考知乎教<a href="https://zhuanlan.zhihu.com/p/26625249">《 GitHub+Hexo 搭建个人网站详细教程》</a></p><h1 id="易错点解析"><a href="#易错点解析" class="headerlink" title="易错点解析"></a>易错点解析</h1><h2 id="ssh密钥"><a href="#ssh密钥" class="headerlink" title="ssh密钥"></a>ssh密钥</h2><p>确保git安装成功之后，生成ssh密钥的主要步骤是：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">git config --global user.name &quot;junhaols&quot; //用户名</span><br><span class="line"></span><br><span class="line">git config --global user.email luojunhaols@gmail.com</span><br><span class="line"></span><br><span class="line">ssh-keygen -t rsa -C luojunhaols@gmail.com</span><br><span class="line"></span><br><span class="line">// 一路回车就行</span><br><span class="line"></span><br></pre></td></tr></table></figure><h2 id="利用Hexo创建博客"><a href="#利用Hexo创建博客" class="headerlink" title="利用Hexo创建博客"></a>利用Hexo创建博客</h2><h3 id="github仓库建立"><a href="#github仓库建立" class="headerlink" title="github仓库建立"></a>github仓库建立</h3><p>注意用于博客的仓库建立必须按照指定的形式，<strong>“username.github.io”</strong>。笔者的GitHub账户为：junhaols，因此该仓库只能命名为：<strong>junhaols.github.io</strong>。</p><h3 id="本地预览博客"><a href="#本地预览博客" class="headerlink" title="本地预览博客"></a>本地预览博客</h3><ul><li>新建一个博客的专属文件夹，cd到那个文件夹下去操作  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli </span><br><span class="line"></span><br><span class="line">hexo init blog</span><br><span class="line">```                                                                        </span><br><span class="line">- 上一步中创建了文件夹~/blog，接下来的命令都需要在该文件夹下进行</span><br><span class="line">```bash</span><br><span class="line">hexo new test_my_site</span><br><span class="line"></span><br><span class="line">hexo g  //生成</span><br><span class="line"></span><br><span class="line">hexo s  //启动本地预览，localhost:4000</span><br><span class="line"></span><br></pre></td></tr></table></figure></li></ul><h3 id="上传至github预览"><a href="#上传至github预览" class="headerlink" title="上传至github预览"></a>上传至github预览</h3><ul><li><p>修改~/blog文件夹下的配置文件”_config.yml”，注意branch设置为“main”(不用master)，示例：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Deployment</span><br><span class="line">## Docs: https://hexo.io/docs/one-command-deployment</span><br><span class="line">deploy:</span><br><span class="line">  type: git //注意冒号后必须空格</span><br><span class="line">  repo: https://github.com/junhaols/junhaols.github.io.git //注意这里加一个“.git”</span><br><span class="line">  branch: main //默认是main,最好不用master</span><br></pre></td></tr></table></figure></li><li><p>部署插件</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure></li><li><p>部署网页</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean </span><br><span class="line">hexo g </span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure></li><li><p>在线浏览<br>在浏览器输入：junhaols.github.io</p></li></ul><h2 id="修改博客主题"><a href="#修改博客主题" class="headerlink" title="修改博客主题"></a>修改博客主题</h2><p>修改主题主要参考<a href="https://oakland.github.io/2016/04/30/hexo-%E5%A6%82%E4%BD%95%E6%9B%B4%E6%8D%A2%E4%B8%BB%E9%A2%98%E3%80%81%E5%88%A0%E9%99%A4%E6%96%87%E7%AB%A0/">《Hexo如何更换主题删除文章》</a>。</p><h3 id="主题模版"><a href="#主题模版" class="headerlink" title="主题模版"></a>主题模版</h3><p>Hexo官网提供了很多<a href="https://github.com/hexojs/hexo/wiki/Themes">主题模版</a>。个人比较喜欢的是TKL这款。</p><h3 id="配置步骤"><a href="#配置步骤" class="headerlink" title="配置步骤"></a>配置步骤</h3><p>以TKL为例说明一下配置步骤。</p><ul><li><p>cd ~/blog/theme，进入到theme文件夹下打开终端</p></li><li><p>下载主题</p><ul><li>首先进入主题下载的github路径，获取其完整路径<br>  <a href="https://github.com/SuperKieran/TKL">https://github.com/SuperKieran/TKL</a></li><li>git clone主题（按照如下格式改写，注意区别）  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone git@github.com:SuperKieran/TKL.git</span><br></pre></td></tr></table></figure></li></ul></li><li><p>修改theme下的_config.yml文件，将theme设置为TKL（注意冒号后空格）</p></li><li><p>部署网页<br>  hexo g<br>  hexo d</p></li><li><p>完成</p><h1 id="未完待续"><a href="#未完待续" class="headerlink" title="未完待续"></a>未完待续</h1><p>后续有新加功能随时会补充说明。</p></li></ul>]]></content>
     
     
       
       
-    <summary type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt; for</summary>
+    <summary type="html">&lt;h1 id=&quot;工具选择&quot;&gt;&lt;a href=&quot;#工具选择&quot; class=&quot;headerlink&quot; title=&quot;工具选择&quot;&gt;&lt;/a&gt;工具选择&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;Hexo+Github&lt;/strong&gt;，搭建步骤请参考知乎教&lt;a href=&quot;https://zhuanl</summary>
       
     
     
