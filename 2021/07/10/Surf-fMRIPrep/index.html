@@ -181,7 +181,7 @@
     
     
     | 
-    <a href='/tags/fMRI-surface/'>fMRI,surface</a>
+    <a href='/tags/fMRI-surface-based/'>fMRI,surface-based</a>
     
     
 </span>
@@ -189,10 +189,7 @@
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-      		<p>##Surface-based fMRIprep on HCP database</p>
-<p>###原始数据</p>
-<p>####数据简介</p>
-<ul>
+      		<h2 id="Surface-based-fMRIprep-on-HCP-database"><a href="#Surface-based-fMRIprep-on-HCP-database" class="headerlink" title="Surface-based fMRIprep on HCP database"></a>Surface-based fMRIprep on HCP database</h2><h3 id="原始数据"><a href="#原始数据" class="headerlink" title="原始数据"></a>原始数据</h3><h4 id="数据简介"><a href="#数据简介" class="headerlink" title="数据简介"></a>数据简介</h4><ul>
 <li>该数据属于开源项目<a target="_blank" rel="noopener" href="https://www.humanconnectome.org/">Human Connectome Porject (HCP)</a>中的研究项目<a target="_blank" rel="noopener" href="https://www.humanconnectome.org/study/hcp-young-adult">HCP Young Adult</a>。具体采用的Data Releases为 <a target="_blank" rel="noopener" href="https://www.humanconnectome.org/study/hcp-young-adult/document/1200-subjects-data-release">1200 Subjects Data Release</a>。</li>
 </ul>
 <ul>
@@ -207,8 +204,7 @@
 <li><p><strong>fMRI基本参数</strong><br>  Voxel size: 2.0mm×2.0mm×2.0mm<br>  TR=720ms,TE=33.1ms,FA=52度，bandwidth=2290Hz/pixel,FOV=208x208mm2,multiband accelerated factor=8,slices=72,1200 frames within 14 min and 24s.</p>
 </li>
 </ul>
-<p>###数据预处理<br>####预处理步骤</p>
-<ul>
+<h3 id="数据预处理"><a href="#数据预处理" class="headerlink" title="数据预处理"></a>数据预处理</h3><h4 id="预处理步骤"><a href="#预处理步骤" class="headerlink" title="预处理步骤"></a>预处理步骤</h4><ul>
 <li><strong>流程图</strong></li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">st=&gt;start: HCP data</span><br><span class="line">op1=&gt;operation: HCP minimal Pipeline（sMRI+fMRI）</span><br><span class="line">op2=&gt;operation: ICA-FIX cleaning</span><br><span class="line">op21=&gt;operation: MSM-Sulc/(MSM-All)</span><br><span class="line">op22=&gt;operation: DeDriftAndResample</span><br><span class="line">op3=&gt;operation: Surface fMRI data for further preprocess</span><br><span class="line">op4=&gt;operation: Detrend</span><br><span class="line">cond1=&gt;condition: Regress GS?</span><br><span class="line">op51=&gt;operation: Regression(WM+CSF)</span><br><span class="line">op52=&gt;operation: Regression(WM+CSF+GS)</span><br><span class="line">op6=&gt;operation: Bandpass filtering(0.01-0.01Hz)</span><br><span class="line">op7=&gt;operation: Scrubbing</span><br><span class="line">cond2=&gt;condition: Interpolation?</span><br><span class="line">op8=&gt;operation: Interpolation(spline)</span><br><span class="line">op9=&gt;operation: Smooth(FWHM:4)</span><br><span class="line">e=&gt;end</span><br><span class="line"></span><br><span class="line">st-&gt;op1-&gt;op2-&gt;op21-&gt;op22-&gt;op3-&gt;op4-&gt;cond1</span><br><span class="line">cond1(yes)-&gt;op52</span><br><span class="line">cond1(no)-&gt;op51</span><br><span class="line">op51-&gt;op6-&gt;op7-&gt;cond2</span><br><span class="line">op52-&gt;op6-&gt;op7-&gt;cond2</span><br><span class="line"></span><br><span class="line">cond2(yes)-&gt;op8-&gt;op9</span><br><span class="line">cond2(no)-&gt;op9</span><br><span class="line">op9-&gt;e</span><br><span class="line"></span><br></pre></td></tr></table></figure>
@@ -367,8 +363,7 @@
 <ul>
 <li><strong>预处理小结</strong><br>  <strong>Surface based fMRI的预处理的处理流程，与组内的volume fMRI的预处理流程保持一致</strong>。核心步骤的顺序是：<strong>detrend—-regression—–filtering—–scrubbing—–smooth</strong>。其中detrend和regression连在一起，个人理解是利用一般线性模型进行的detrend操作实际上是为了去除线性漂移，其本质就是回归掉了一条线性噪声的影响，其数学本质其实与regression一样。只不过这里的regression步骤回归的是常数信号(WM,CSF均值时间序列，斜率为0的直线)，而detend一般回归掉的是一条斜率不为0的直线。接下来做filtering,提取有效的fMRI的信号，之后做scrubbing。滤波对时间点是敏感的，因为频率与信号周期有关，而周期与时间点有关系,但是scrubbing操作会删除头动过大的时间点，导致周期发生改变进而影响频率，因此scrubbing操作不能在filtering之前，一般就跟在filtering之后。最后做smooth(<a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1053811919303027">Li et al.,2019</a>),进一步提高信噪比，利于后续的统计分析。</li>
 </ul>
-<p>####预处理输入输出</p>
-<ul>
+<h4 id="预处理输入输出"><a href="#预处理输入输出" class="headerlink" title="预处理输入输出"></a>预处理输入输出</h4><ul>
 <li><p><strong>预处理文件输入</strong></p>
 <ul>
 <li><p><strong>HCPS1200的数据存储路径</strong><br>大集群：/brain/gonggllab/HCPS1200_Final，记为：<strong>HCPS1200=/brain/gonggllab/HCPS1200_Final</strong></p>
