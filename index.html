@@ -97,7 +97,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/07/09/test-first-blog/" data-id="ckqw2uvpx0002y6t1b8e455sh" data-title="test first blog" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2021/07/09/test-first-blog/" data-id="ckqw3hum600023wt13g878v77" data-title="test first blog" class="article-share-link">Share</a>
       
       
       
@@ -131,12 +131,15 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>first blog</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><strong>极大似然估计（Maximum Likelihood Estimation，MLE）和贝叶斯估计（Bayesian Estimation）是统计推断中两种最常用的参数估计方法，二者在机器学习中的应用也十分广泛</strong>。两种方法的本质都是参数估计，即假设抽取到的每一个样本均来自于同一个总体，也就是说，抽样得到的样本$\begin{equation}X_{i}\in f(\theta )\end{equation}$，其中$f(\theta)$为某一分布。极大似然估计和贝叶斯估计的思想都是利用现有的观测数据$X_{i}$去估计该分布的参数$\theta$。</p>
+<h2 id="极大似然估计"><a href="#极大似然估计" class="headerlink" title="极大似然估计"></a>极大似然估计</h2><p>极大似然估计的思想是，假设$\theta$为已知$\theta_{0}$，则对于样本$X_{i}$出现的概率为$f(X_{i}|\theta_{0})$，则对于某样本集${X_{1},X_{2},…,X_{n}}$可以描述为以下事件：$X=X_{1},X=X_{2},…,X=X_{n}$同时出现，又由于这些样本是独立同分布的，由概率的乘法原则，它们同时出现的概率为它们各自出现的概率值相乘，这个也是似然函数定义的由来。于是，似然函数可以定义为：<br>$$L(\theta|x)=f(x|\theta)=f(x=X_{1}|\theta)<em>f(x=X_{2}|\theta)</em>,…,*f(x=X_{n}|\theta)$$<br>简写为：<br>$$L(\theta|x)=\prod_{i=1}^{n}f(x_{i}|\theta)$$<br>这个函数的变量只有$\theta$，$x_{i}$是已知的观测样本。当似然函数最大的时，则认为最有可能出现这样的一组观测值。此时对应的$\theta$即为最有可能的样本服从的原始分布$f(\theta)$的参数值。因此，参数$\theta$的估计一般通过最大化似然函数求对应的自变量$\theta$，故又称<strong>极大似然法</strong>。为了求导等计算的方便，一般会将似然函数先左右同时取对数再计算。</p>
+<h2 id="最大后验概率估计"><a href="#最大后验概率估计" class="headerlink" title="最大后验概率估计"></a>最大后验概率估计</h2><p>最大后验概率估计，英文为Maximum A Posterior Estimation，简写为MAP。与MLE不同的是，MAP是从观测数据出发，认为使得$P(\theta|x)$最大的参数$\theta$为最优的$\theta$。MLE认为$\theta$是固定的值，MAP认为$\theta$服从一个分布，最优的$\theta$即为$\theta$的分布的期望值。因此，MAP的目的就是通观测样本$X$去估计$\theta$的分布。由贝叶斯公式可得：<br>$$P(\theta|X)=\frac{P(X|\theta)P(\theta)}{P(X)}$$<br>对于极大似然估计，认为$\theta$为固定值，此时$P(\theta)=1$，而对于最大后演概率估计，$P(\theta)$的取值有由$\theta$的概率分布得到。由于$X$的先验分布是已知的，因此$P(X)$是已知的。并且$P(X)$与$\theta$无关，因此最大后验概率估计的的优化公式可以转换为：<br>$$\underset{\theta}{argmax}P(\theta|X)=\underset{\theta}{argmax}\frac{P(X|\theta)P(\theta)}{P(X)}$$</p>
+<h2 id="贝叶斯估计"><a href="#贝叶斯估计" class="headerlink" title="贝叶斯估计"></a>贝叶斯估计</h2><h1 id="参考材料"><a href="#参考材料" class="headerlink" title="参考材料"></a>参考材料</h1><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/61593112">https://zhuanlan.zhihu.com/p/61593112</a><br><a target="_blank" rel="noopener" href="https://www.jiqizhixin.com/articles/2019-01-18-12">https://www.jiqizhixin.com/articles/2019-01-18-12</a><br><a target="_blank" rel="noopener" href="http://noahsnail.com/2018/05/17/2018-05-17-%E8%B4%9D%E5%8F%B6%E6%96%AF%E4%BC%B0%E8%AE%A1%E3%80%81%E6%9C%80%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1%E3%80%81%E6%9C%80%E5%A4%A7%E5%90%8E%E9%AA%8C%E6%A6%82%E7%8E%87%E4%BC%B0%E8%AE%A1/">http://noahsnail.com/2018/05/17/2018-05-17-%E8%B4%9D%E5%8F%B6%E6%96%AF%E4%BC%B0%E8%AE%A1%E3%80%81%E6%9C%80%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1%E3%80%81%E6%9C%80%E5%A4%A7%E5%90%8E%E9%AA%8C%E6%A6%82%E7%8E%87%E4%BC%B0%E8%AE%A1/</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/07/09/ljh-test-site/" data-id="ckqw2uvpv0001y6t1b6lggnns" data-title="ljh_test_site" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2021/07/09/ljh-test-site/" data-id="ckqw3hum500013wt13g52dg0o" data-title="ljh_test_site" class="article-share-link">Share</a>
       
       
       
@@ -187,7 +190,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/07/09/hello-world/" data-id="ckqw2uvpp0000y6t16n6bfzcb" data-title="Hello World" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2021/07/09/hello-world/" data-id="ckqw3hulz00003wt1bnd6342y" data-title="Hello World" class="article-share-link">Share</a>
       
       
       
